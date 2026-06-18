@@ -4,33 +4,22 @@
 
 ## 🚀 Features
 
-### 🛒 Shopping Features
-
-* Product browsing and listings
-* Product categories and filtering
-* Search functionality
-* Add to cart and remove from cart
-* Checkout workflow
-
-### 📊 Dashboard & Management
-
-* Order management
-* Sales and product statistics
-* User activity tracking
-
-### 📱 Responsive Design
-
-* Mobile-friendly interface
-* Optimized user experience across devices
+* **🔎 Product Search & Categories** – Easily browse, search, and filter products by category.
+* **🛒 Shopping Cart System** – Add, update, and remove products from the cart seamlessly.
+* **💳 Checkout Workflow** – Smooth and user-friendly checkout process for completing purchases.
+* **📦 Order Management** – Manage and track customer orders efficiently.
+* **📊 Sales & Product Analytics** – View sales performance and product statistics through the dashboard.
+* **👥 User Activity Tracking** – Monitor user interactions and shopping behavior.
+* **📱 Responsive Design** – Optimized for desktops, tablets, and mobile devices.
+* **⚡ Simple & Fast User Interface** – Clean, lightweight design for a smooth shopping experience.
 
 ## 🛠️ Technologies Used
 
 * **Frontend:** HTML, CSS, JavaScript
 * **Backend:** PHP 
 * **Database:** MySQL 
-* **Authentication:** 
-* **Version Control:** Git & GitHub
-
+* **Code Editor:** Visual Studio Code
+  
 ## 📱 How It Works
 
 1. Users create an account or log in.
