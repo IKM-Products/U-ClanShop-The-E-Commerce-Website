@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>U-ClanShop - Products</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo-container-wrapper">
+            <img src="resources/images/logo.png" class="uclan-logo" alt="uclan logo" style="width: 150px;" height="50px">
+        </div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="products.html">Products</a>
+            <a href="cart.html">Cart</a>
+            
+            <span id="nav-auth-links">
+                <a href="log-in.html">Log In</a>
+            </span>
+        </nav>
+    </header>
+
+    <div class="page-container" style="flex-direction: column; justify-content: flex-start; align-items: center;">
+        <h1 style="color: #000000; margin: 20px 0; font-size: 2.5rem; font-weight: bold; text-align: center; width: 100%;">Our Products</h1>
+        
+        <section class="products" id="products-container">
+        </section>
+    </div>
+
+    <script src="resources/product-array.js"></script>
+
+    <script>
+        const productsContainer = document.getElementById('products-container');
+        
+        // Step 2: Fallback renderer mapping array fields to match structure
+        function loadStaticProducts() {
+            // Checks if 'tshirts' array variable is present inside product-array.js
+            if (typeof tshirts !== 'undefined') {
+                tshirts.forEach((tshirt) => {
+                    const name = tshirt[0];
+                    const color = tshirt[1];
+                    const priceString = tshirt[2];
+                    const stock = tshirt[3];
+                    const imageSrc = tshirt[4];
+                    // Using a hash modifier logic to supply a unique runtime context ID matching row offsets
+                    const id = imageSrc.replace(/\D/g, '') || Math.floor(Math.random() * 100); 
+
+                    const numericPrice = parseFloat(priceString.replace('£', ''));
+                    const fullTitle = `${color} ${name}`;
+
+                    const productCard = `
+                        <div class="product-card">
+                            <img src="resources/${imageSrc}" alt="${fullTitle}">
+                            <h3>${fullTitle}</h3>
+                            <p>${priceString}</p>
+                            <p class="stock-status ${stock}">Stock: ${stock.replace('-', ' ')}</p>
+                            <button 
+                                ${stock === 'out-of-stock' ? 'disabled' : ''} 
+                                onclick="addToCart(${id}, '${fullTitle.replace(/'/g, "\\'")}', ${numericPrice})">
+                                ${stock === 'out-of-stock' ? 'Out of Stock' : 'Add to Cart'}
+                            </button>
+                        </div>
+                    `;
+                    productsContainer.innerHTML += productCard;
+                });
+            } else {
+                productsContainer.innerHTML = `<p style="color:red;">Error: 'tshirts' matrix data array structure could not be mapped.</p>`;
+            }
+        }
+
+        // Add to Cart integration using localStorage matching cart.html specifications
+        window.addToCart = function(id, name, price) {
+            let cart = JSON.parse(localStorage.getItem('uclan_cart')) || [];
+            const existingItem = cart.find(item => item.id === id);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    id: id,
+                    name: name,
+                    price: price,
+                    quantity: 1
+                });
+            }
+            
+            localStorage.setItem('uclan_cart', JSON.stringify(cart));
+            alert(`👕 ${name} added to your cart successfully!`);
+        };
+
+        // Initialize display using file data inputs
+        loadStaticProducts();
+
+        // UPDATED: Real-time dynamic navigation profile routing rule maps
+        document.addEventListener("DOMContentLoaded", () => {
+            const authLinksContainer = document.getElementById('nav-auth-links');
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+            const username = localStorage.getItem('username');
+
+            if (isLoggedIn === 'true' && authLinksContainer) {
+                // Displays ONLY the profile routing element link in the top-right header container
+                authLinksContainer.innerHTML = `
+                    <a href="profile.html" style="font-weight: bold; color: #ffffff;">My Profile</a>
+                `;
+            }
+        });
+    </script>
+</body>
+</html>

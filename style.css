@@ -1,0 +1,432 @@
+/* --- Base Reset & Page Layout --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f5f5f5;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- Sticky Global Navigation Bar --- */
+header {
+    position: sticky;
+    top: 0;
+    background: #0ba6d1;
+    color: white;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 3px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 0 10px rgba(6, 6, 6, 0.1);
+    z-index: 1000;
+}
+
+/* --- Crisp Contrast Text Logo Modification --- */
+.uclan-logo {
+    display: block;
+    /* Keeps the original bright colors of the rose crest, but layers crisp, deep blue 
+        shadows directly under the white lettering to make the text appear dark and readable */
+    filter: drop-shadow(1px 0px 0px #0c394c) 
+            drop-shadow(-1px 0px 0px #0c394c) 
+            drop-shadow(0px 1px 0px #0c394c) 
+            drop-shadow(0px -1px 0px #0c394c)
+            drop-shadow(0px 0px 2px #0c394c);
+    transition: filter 0.2s ease;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* --- Hero Background Video Layout Styles --- */
+.hero-section {
+    position: relative;
+    width: 100%;
+    height: 60vh;
+    min-height: 400px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.hero-section iframe {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100vw;
+    height: 56.25vw; /* 16:9 Aspect Ratio */
+    min-height: 100vh;
+    min-width: 177.77vh; /* 16:9 Aspect Ratio */
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    object-fit: cover;
+    
+    /* Disables clicks, pauses, and accidental hover interactions */
+    pointer-events: none; 
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 2;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 3;
+    color: #ffffff;
+    padding: 0 20px;
+}
+
+/* --- Centering Wrapper for Login Page --- */
+.page-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+/* --- Refined Login Container --- */
+.login-container {
+    background-color: #0ba6d1;
+    width: 100%;
+    max-width: 550px;
+    padding: 3rem 2.5rem;
+    border-radius: 20px; /* Softer, rounder corners matching image_781bcf.png */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    color: #000000; /* Deep dark text color for high contrast readability */
+    text-align: center;
+}
+
+.login-form h2 {
+    margin-bottom: 0.5rem;
+    color: #000000;
+    text-align: center;
+    font-size: 2.2rem;
+    font-weight: bold;
+}
+
+.login-form p {
+    margin-bottom: 2rem;
+    color: #000000;
+    text-align: center;
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+/* --- Input Alignment Block --- */
+.input-group {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.input-group label {
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-align: left;
+    width: 110px;
+    color: #0c394c;
+}
+
+.input-group input {
+    flex: 1;
+    padding: 12px 16px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    background-color: #ffffff;
+    outline: none;
+}
+
+/* --- Dark Pill-Shaped Sign In Button --- */
+.login-btn {
+    width: 100%;
+    background-color: #0e7896; /* Darker teal/blue shade from image_781bcf.png */
+    color: #ffffff;
+    padding: 14px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 50px; /* Changes button layout to a clean pill-shape */
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background 0.2s, transform 0.1s;
+}
+
+.login-btn:hover {
+    background-color: #0a5d75;
+}
+
+.login-btn:active {
+    transform: scale(0.99);
+}
+
+/* --- Footer Link Placements --- */
+.form-footer {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    font-size: 0.95rem;
+}
+
+.form-footer a {
+    color: #0c394c;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.form-footer a:hover {
+    color: #041924;
+}
+
+/* --- Products Directory Page Layout --- */
+.products {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 50px;
+    padding: 40px;
+    flex: 1;
+}
+
+.product-card {
+    background: white;
+    width: 250px;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(6, 6, 6, 0.1);
+    color: #333333;
+}
+
+.product-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* --- Cart Page Columns Layout --- */
+.cart-header {
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.cart-header h2 {
+    font-size: 2.2rem;
+    color: #0f172a;
+    margin: 0 0 8px 0;
+}
+
+.cart-header p {
+    font-size: 1.05rem;
+    color: #64748b;
+    margin: 0;
+}
+
+.cart-inner {
+    display: flex;
+    gap: 30px;
+    width: 100%;
+    max-width: 1200px;
+    align-items: flex-start;
+}
+
+.cart-items-container {
+    flex: 2;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.order-summary {
+    flex: 1;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    font-size: 1rem;
+}
+
+.summary-row.total {
+    font-weight: bold;
+    font-size: 1.2rem;
+    border-top: 1px solid #ddd;
+    padding-top: 15px;
+    margin-top: 15px;
+}
+
+/* --- Breadcrumb & Banners --- */
+.page-banner {
+    background: #e9ecef;
+    padding: 30px 40px;
+    text-align: left;
+}
+
+.breadcrumb {
+    padding: 15px 40px;
+    font-size: 0.9rem;
+}
+
+.breadcrumb a {
+    color: #0ba6d1;
+    text-decoration: none;
+}
+
+.discount-input-wrap {
+    display: flex;
+    gap: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+.discount-input {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Reusable global generic button style */
+button {
+    background: #0ba6d1;
+    color: white;
+    padding: 10px 20px;
+    margin-top: 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+/* --- Inventory / Stock Status Styles --- */
+.stock-status {
+    font-size: 12px;
+    margin-top: 5px;
+    font-weight: bold;
+}
+
+.stock-status.good-stock { color: green; }
+.stock-status.last-few { color: orange; }
+.stock-status.out-of-stock { color: red; }
+
+/* --- Footer Element --- */
+footer {
+    background-color: #0ba6d1;
+    color: #f5f5f5;
+    padding: 15px;
+    text-align: center;
+    border-top: 3px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 0 10px rgba(6, 6, 6, 0.1);
+    margin-top: auto;
+}
+
+/* --- Dashboard Flex Wrapper (Sidebar Right Align) --- */
+.dashboard-wrapper {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    flex: 1;
+}
+
+/* --- Right Side Menu Styling --- */
+.right-sidebar {
+    width: 280px;
+    background-color: #0ba6d1; /* Matched precisely to your header style background color */
+    color: #ffffff;
+    padding: 25px 15px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Menu Title Bar Area */
+.sidebar-menu-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+}
+
+/* Navigation Links layout */
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.sidebar-nav a {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    padding: 12px 15px;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: all 0.2s ease-in-out;
+}
+
+/* Interactivity Hover and Active Mapping States */
+.sidebar-nav a:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    padding-left: 20px; /* Slight push animation effect on layout elements */
+}
+
+.sidebar-nav a.active {
+    background-color: #4CAF50; /* Active option highlight color */
+    color: #ffffff;
+    font-weight: bold;
+}
+
+/* Fallback handling for responsive desktop breakpoint constraints */
+@media (max-width: 768px) {
+    .dashboard-wrapper {
+        flex-direction: column-reverse; /* Drops sidebar below main window layout on compact viewports */
+    }
+    .right-sidebar {
+        width: 100%;
+        border-left: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+}

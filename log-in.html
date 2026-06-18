@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>U-ClanShop - Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <img src="resources/images/logo.png" class="uclan-logo" alt="uclan logo" style="width: 150px;" height="50px">
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="products.html">Products</a>
+            <a href="cart.html">Cart</a>
+            
+            <span id="nav-auth-links">
+                <a href="log-in.html">Log In</a>
+            </span>
+        </nav>
+    </header>
+
+    <div class="page-container">
+        <div class="login-container">
+            <form id="login-form" class="login-form">
+                <h2>Welcome</h2>
+                <p class="subtitle">Please enter your details</p>
+                
+                <div class="input-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                
+                <button type="submit" class="login-btn">Log In</button>
+                
+                <div class="form-footer">
+                    <a href="forgot-password.html">Forgot Password?</a>
+                    <a href="signup.html">Sign Up</a>
+                </div>
+                <p id="login-msg" style="margin-top: 15px; text-align: center; font-weight: bold;"></p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const msgEl = document.getElementById('login-msg');
+            const formData = {
+                username: document.getElementById('username').value,
+                password: document.getElementById('password').value
+            };
+
+            try {
+                const response = await fetch('http://localhost:3000/login.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    msgEl.style.color = "green";
+                    msgEl.innerText = "Login successful! Redirecting...";
+                    
+                    // Saves specific user fields to align with dynamic script tracking
+                    localStorage.setItem('isLoggedIn', 'true');
+                    localStorage.setItem('username', result.user.name);
+                    localStorage.setItem('userId', result.user.id);
+                    
+                    setTimeout(() => window.location.href = 'index.html', 1500);
+                } else {
+                    msgEl.style.color = "red";
+                    msgEl.innerText = result.error || "Invalid username or password.";
+                }
+            } catch (err) {
+                msgEl.style.color = "red";
+                msgEl.innerText = "Connection error. Ensure login.php is active.";
+            }
+        });
+
+        // Dynamic script section to manage header links immediately on load loop
+        document.addEventListener("DOMContentLoaded", () => {
+            const authLinksContainer = document.getElementById('nav-auth-links');
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+            const username = localStorage.getItem('username');
+
+            if (isLoggedIn === 'true' && authLinksContainer) {
+                authLinksContainer.innerHTML = `
+                    <a href="profile.html" style="font-weight: bold; color: #4CAF50;">Welcome, ${username}!</a>
+                    <a href="#" id="logout-btn" style="margin-left: 10px;">Log Out</a>
+                `;
+
+                document.getElementById('logout-btn').addEventListener('click', (e) => {
+                    e.preventDefault();
+                    localStorage.removeItem('isLoggedIn');
+                    localStorage.removeItem('username');
+                    localStorage.removeItem('userId');
+                    alert("You have logged out successfully.");
+                    window.location.href = 'index.html';
+                });
+            }
+        });
+    </script>
+</body>
+</html>
