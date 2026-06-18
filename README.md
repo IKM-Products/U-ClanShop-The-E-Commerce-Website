@@ -31,7 +31,7 @@
 * **Authentication:** 
 * **Version Control:** Git & GitHub
 
-## 📂 Workflow
+## 📱 How It Works
 
 1. Users create an account or log in.
 2. Browse and search available products.
